@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitboxCollisionHandler : MonoBehaviour
 {
     private HitHandler myHitHandler;
+    public float damage = 5f;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class HitboxCollisionHandler : MonoBehaviour
             bool onSamePlane = Mathf.Abs(myHitHandler.transform.position.y - hitHandler.transform.position.y) <= 0.35f;
             if (onSamePlane)
             {
-                hitHandler.GetHit();
+                hitHandler.GetHit(damage); // Eventually should pass in the attackData associated with the hitbox (Should hold knockback, hitstun, damage, etc.)
 
             }
         }

@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.sprite = attackSprite;
 
         GameObject attack = Instantiate(hitbox, transform);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(attack);
         spriteRenderer.sprite = originalSprite;
         stateMachine.IsAttacking = false;
