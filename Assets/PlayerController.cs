@@ -19,12 +19,13 @@ public class PlayerController : MonoBehaviour
     private Collider2D feetCollider;
     private ContactPoint2D[] currentCollisions = new ContactPoint2D[2];
     int numberOfContacts;
-    private bool isAttacking;
+    private StateMachine stateMachine;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         feetCollider = GetComponent<BoxCollider2D>();
+        stateMachine = GetComponent<StateMachine>();
     }
 
     private void AttackAction()
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Attack(GameObject hitbox)
     {
-        isAttacking = true;
+        stateMachine.IsAttacking = true;
         Sprite originalSprite = spriteRenderer.sprite;
         spriteRenderer.sprite = attackSprite;
 
@@ -42,15 +43,27 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         Destroy(attack);
         spriteRenderer.sprite = originalSprite;
-        isAttacking = false;
+        stateMachine.IsAttacking = false;
     }
     void MoveCharacter()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         numberOfContacts = feetCollider.GetContacts(currentCollisions);
-        
-        if(numberOfContacts > 0)
+
+        if (PlayerCamera.cameraLocked)
+        {
+            if (transform.position.x <= PlayerCamera.cameraMin.x)
+            {
+                horizontalInput = Mathf.Max(0f, horizontalInput);
+            }
+            else if (transform.position.x >= PlayerCamera.cameraMax.x)
+            {
+                horizontalInput = Mathf.Min(0f, horizontalInput);
+            }
+        }
+
+        if (numberOfContacts > 0)
         {
             if (currentCollisions[0].normal.y > 0f)
             {
@@ -70,6 +83,16 @@ public class PlayerController : MonoBehaviour
             case > 0f:
                 spriteRenderer.flipX = false;
                 break;
+            case 0f:
+                break;
+        }
+        if (verticalInput != 0 || horizontalInput != 0)
+        {
+            stateMachine.IsMoving = true;
+        }
+        else
+        {
+            stateMachine.IsMoving = false;
         }
         transform.position += new Vector3(horizontalInput * horizontalSpeed * Time.deltaTime, verticalInput * verticalSpeed * Time.deltaTime, 0);
     }
@@ -77,10 +100,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && !isAttacking)
+        if (!stateMachine.IsAttacking)
         {
-            AttackAction();
+            MoveCharacter();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                AttackAction();
+            }
         }
-        MoveCharacter();
     }
 }
