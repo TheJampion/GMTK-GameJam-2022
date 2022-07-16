@@ -27,7 +27,6 @@ public class HitHandler : MonoBehaviour
 
     IEnumerator GetHitCoroutine(float timeInHitstun, float damage)
     {
-        stateMachine.IsInHitstun = true;
         healthHandler.TakeDamage(damage);
         if (healthHandler.currentHealth <= 0)
         {
@@ -36,7 +35,6 @@ public class HitHandler : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(timeInHitstun);
-            stateMachine.IsInHitstun = false;
         }
     }
 

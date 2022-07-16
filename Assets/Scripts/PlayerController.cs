@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private ContactPoint2D[] currentCollisions = new ContactPoint2D[2];
     int numberOfContacts;
     private StateMachine stateMachine;
+    public bool isMoving;
 
     private void Awake()
     {
@@ -35,15 +36,17 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Attack(GameObject hitbox)
     {
-        stateMachine.IsAttacking = true;
-        Sprite originalSprite = spriteRenderer.sprite;
-        spriteRenderer.sprite = attackSprite;
-
         GameObject attack = Instantiate(hitbox, transform);
-        yield return new WaitForSeconds(0.5f);
-        Destroy(attack);
-        spriteRenderer.sprite = originalSprite;
-        stateMachine.IsAttacking = false;
+        if (spriteRenderer.flipX)
+        {
+            Vector3 attackPos = attack.transform.localPosition;
+            attack.transform.localPosition = new Vector3(-attackPos.x, attackPos.y, attackPos.z);
+        }
+        yield return new WaitForSeconds(0.25f);
+        if (attack)
+        {
+            Destroy(attack);
+        }
     }
     void MoveCharacter()
     {
@@ -78,21 +81,21 @@ public class PlayerController : MonoBehaviour
         switch (horizontalInput)
         {
             case < 0f:
-                spriteRenderer.flipX = true;
+                transform.right = -Vector2.right;
                 break;
             case > 0f:
-                spriteRenderer.flipX = false;
+                transform.right = Vector2.right;
                 break;
             case 0f:
                 break;
         }
         if (verticalInput != 0 || horizontalInput != 0)
         {
-            stateMachine.IsMoving = true;
+            isMoving = true;
         }
         else
         {
-            stateMachine.IsMoving = false;
+            isMoving = false;
         }
         transform.position += new Vector3(horizontalInput * horizontalSpeed * Time.deltaTime, verticalInput * verticalSpeed * Time.deltaTime, 0);
     }
@@ -100,13 +103,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!stateMachine.IsAttacking)
+        MoveCharacter();
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            MoveCharacter();
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                AttackAction();
-            }
+            AttackAction();
         }
     }
 }

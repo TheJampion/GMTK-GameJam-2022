@@ -15,7 +15,7 @@ public class EnemyWave : MonoBehaviour
     public List<Enemy> activeEnemies;
     public int maxActiveEnemies;
     public int totalEnemies;
-    public int enemySpawnCounter;
+    public int enemiesAlreadySpawned;
     public bool waveActive;
     public bool waveFinished = true;
     public float timeBetweenSpawns;
@@ -23,19 +23,28 @@ public class EnemyWave : MonoBehaviour
 
     private float spawnTimer;
 
-    public void StartWave()
+    private void Start()
     {
-        waveActive = true;
-        fightBoundary.SetActive(false);
-        foreach(Enemy enemy in startingEnemies)
+        foreach (Enemy enemy in startingEnemies)
         {
             enemy.onDestroy += (enemy) => DestroyEnemy(enemy);
             enemy.activated = true;
             activeEnemies.Add(enemy);
             totalEnemies++;
-            enemySpawnCounter++;
+            enemiesAlreadySpawned++;
         }
+        startingEnemies.Clear();
+    }
+    public void StartWave()
+    {
+        waveActive = true;
+        EnemyManager.instance.waveStarted = true;
+        fightBoundary.SetActive(false);
         totalEnemies += enemiesToSpawn.Count;
+        foreach(Enemy enemy in activeEnemies)
+        {
+            EnemyManager.instance.AddEnemyToQueue(enemy);
+        }
     }
 
     private void DestroyEnemy(Enemy enemy)
@@ -45,11 +54,11 @@ public class EnemyWave : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        spawnTimer = 0;
-        int lastEnemyIndex = enemiesToSpawn.Count - 1;
-
         if (waveActive && activeEnemies.Count < maxActiveEnemies)
         {
+            spawnTimer = 0;
+            int lastEnemyIndex = enemiesToSpawn.Count - 1;
+
             float enemyPosX = enemiesToSpawn[lastEnemyIndex].spawnRightSide ? PlayerCamera.cameraMin.x : PlayerCamera.cameraMax.x;
             float enemyPosY = PlayerCamera.cameraMax.y / PlayerCamera.cameraMin.y;
 
@@ -59,8 +68,9 @@ public class EnemyWave : MonoBehaviour
             {
                 enemy.onDestroy += (enemy) => DestroyEnemy(enemy);
                 activeEnemies.Add(enemy);
-                enemySpawnCounter++;
+                enemiesAlreadySpawned++;
                 enemy.activated = true;
+                EnemyManager.instance.AddEnemyToQueue(enemy);
             }
             enemiesToSpawn.RemoveAt(lastEnemyIndex);
         }
@@ -79,9 +89,10 @@ public class EnemyWave : MonoBehaviour
 
         }
 
-        if(activeEnemies.Count == 0 && waveActive && enemySpawnCounter >= totalEnemies)
+        if(activeEnemies.Count == 0 && waveActive && enemiesAlreadySpawned >= totalEnemies)
         {
             waveFinished = true;
+            EnemyManager.instance.waveStarted = false;
             PlayerCamera.cameraLocked = false;
             Destroy(gameObject);
         }

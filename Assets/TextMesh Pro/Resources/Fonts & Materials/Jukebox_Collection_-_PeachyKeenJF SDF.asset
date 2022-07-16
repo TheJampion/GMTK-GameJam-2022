@@ -53,7 +53,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: 1
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -67,12 +67,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.3809524
+    - _ScaleRatioB: 0
+    - _ScaleRatioC: 0
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -117,9 +117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Jukebox_Collection_-_PeachyKeenJF SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1771111970
   material: {fileID: -5841027956732782966}
-  materialHashCode: 0
+  materialHashCode: 956813630
   m_Version: 1.1.0
   m_SourceFontFileGUID: 160814f3e5324a54882b59b1de5949a8
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 160814f3e5324a54882b59b1de5949a8, type: 3}

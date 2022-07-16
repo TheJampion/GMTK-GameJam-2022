@@ -5,53 +5,119 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public bool IsAttacking;
-    public bool IsInHitstun;
-    public bool IsMoving;
-    public float timeTillStateOver;
+    protected float timeTillStateOver;
     private Animator _animator;
-    private int currentState;
-    private float stateTimer;
+    public State currentState { get; private set; }
+    protected float stateTimer;
+    [SerializeField]
+    private State startingState;
+    private PlayerController playerController;
+    private Enemy enemy;
+    private bool isPlayer;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
+        enemy = GetComponent<Enemy>();
+        isPlayer = playerController != null;
     }
 
+    private void Start()
+    {
+        currentState = startingState;
+    }
     private void Update()
     {
-        CheckStateConditions();
         stateTimer += Time.deltaTime;
+        if (isPlayer)
+        {
+            CheckStateConditionsPlayer();
+        }
+        else
+        {
+            CheckStateConditionsEnemy();
+        }
     }
-    private void CheckStateConditions()
-    {
-        if (IsAttacking)
-        {
-            SetState("LightAttack1", 0.1f);
-            return;
-        }
-        if (IsInHitstun)
-        {
-            SetState("Hitstun", 0.1f);
-            return;
-        }
-        if (IsMoving)
-        {
-            SetState("Run", 0.1f);
-            return;
-        }
-            SetState("Idle", 0);
-    }
-    private void SetState(string stateName, float transitionDuration)
-    {
-        int state = Animator.StringToHash(stateName);
-        if (state == currentState)
-            return;
 
-        _animator.CrossFade(state, transitionDuration);
+    public void CheckStateConditionsPlayer()
+    {
+        if (currentState.Transitions.Count > 0)
+        {
+            for (int i = 0; i < currentState.Transitions.Count; i++)
+            {
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.AnimationFinished && stateTimer >= timeTillStateOver)
+                {
+                    EnterState(currentState.Transitions[i].nextState, 0);
+                }
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput)
+                {
+                    if (enemy.isMoving)
+                    {
+                        EnterState(currentState.Transitions[i].nextState, 0);
+                    }
+                }
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput)
+                {
+                    if (!enemy.isMoving)
+                    {
+                        EnterState(currentState.Transitions[i].nextState, 0);
+                    }
+                }
+            }
+        }
+    }
+    public void CheckStateConditionsEnemy()
+    {
+        if (currentState.Transitions.Count > 0)
+        {
+            for (int i = 0; i < currentState.Transitions.Count; i++)
+            {
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.AnimationFinished && stateTimer >= timeTillStateOver)
+                {
+                    EnterState(currentState.Transitions[i].nextState, 0);
+                }
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput)
+                {
+                    if (playerController)
+                    {
+                        if (playerController.isMoving)
+                        {
+                            EnterState(currentState.Transitions[i].nextState, 0);
+                        }
+                    }
+                    if (enemy)
+                    {
+                        if (enemy.isMoving)
+                        {
+                            EnterState(currentState.Transitions[i].nextState, 0);
+                        }
+                    }
+                }
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput)
+                {
+                    if (playerController)
+                    {
+                        if (!playerController.isMoving)
+                        {
+                            EnterState(currentState.Transitions[i].nextState, 0);
+                        }
+                    }
+                    if (enemy)
+                    {
+                        if (!enemy.isMoving)
+                        {
+                            EnterState(currentState.Transitions[i].nextState, 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void EnterState(State state, float transitionDuration)
+    {
+        _animator.Play(state.StateName);
         timeTillStateOver = _animator.GetCurrentAnimatorStateInfo(0).length;
-
-        stateTimer = 0;
         currentState = state;
     }
 }

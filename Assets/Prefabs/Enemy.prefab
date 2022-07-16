@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 7112035294572562426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.84, y: 0.03, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7112035293620680889}
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   activated: 0
+  attackHitbox: {fileID: 8790828186649415429, guid: 7ef80b969d5e0aa4a9174c3c06add588, type: 3}
 --- !u!114 &7112035294572562181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,10 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf357d85e21cc4f864a57bfa69f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAttacking: 0
-  IsInHitstun: 0
-  IsMoving: 0
-  timeTillStateOver: 0
+  startingState: {fileID: 11400000, guid: b3f415c8f53eaef499df39c74bfc6f18, type: 2}
 --- !u!114 &4419673784923082141
 MonoBehaviour:
   m_ObjectHideFlags: 0
