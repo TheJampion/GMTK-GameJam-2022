@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ab143e9cadd53d40b3babad9b8b7f9d
+guid: b0024866d2dd2614795a9c5b9dc68652
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,223 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jon_Run_0
+      name: BossBigAttack_1
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 849
+        width: 247
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c84c7507e191a4baf1feacf6355957
+      internalID: -773876776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_2
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 808
+        width: 248
+        height: 379
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a96ce5ad82deb534f8b331661a11c50a
+      internalID: -574755784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 896
+        width: 322
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed5b7da3045dec4d9b222fe9cde3ddb
+      internalID: -1491981646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_5
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 718
+        width: 291
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31153ba17a784c24bbec0d60fb59ce43
+      internalID: 1866417680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_13
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 218
+        width: 259
+        height: 495
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe10fc149185264a9ea9d8a4e767b01
+      internalID: 1602885546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_14
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 312
+        width: 288
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc34fb0304c5aaa4e9892012f79e719c
+      internalID: 1536707824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_15
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 621
+        width: 320
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8850dccd2a2dd3341b737519429af8d5
+      internalID: -1239108749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_18
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 218
+        width: 240
+        height: 495
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13acad81c4b6f5499c5a3bae559508d
+      internalID: 2017322440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_21
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 331
+        width: 311
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 450f3f0f72a670b44a35280bcb6ccf41
+      internalID: -541141253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_29
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 2
+        width: 265
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba9ebf154ac73a48bae9f42495946a9
+      internalID: -227817002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBigAttack_9
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 402
-        height: 282
+        y: 209
+        width: 239
+        height: 503
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +328,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd99586755df59e48843e8b437dd2e91
-      internalID: 1771934257
+      spriteID: 7e176f376366161429c983f1c366c09e
+      internalID: -802721597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jon_Run_1
+      name: BossBigAttack_0
       rect:
         serializedVersion: 2
-        x: 402
-        y: 0
-        width: 402
-        height: 282
+        x: 0
+        y: 850
+        width: 265
+        height: 339
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,155 +349,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b10a8ccf13ea5c4daf8ee0a3bb677d8
-      internalID: 1170029965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_2
-      rect:
-        serializedVersion: 2
-        x: 804
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7d9a2dc7f2513b469d896421d6b4d8b
-      internalID: -1857487494
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_3
-      rect:
-        serializedVersion: 2
-        x: 1206
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b03c1e5d29952b64f83ba2cd09b7240c
-      internalID: 892211182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_4
-      rect:
-        serializedVersion: 2
-        x: 1608
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dcf919c89d0bc03458ec6bb1ecd40559
-      internalID: -407748033
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_5
-      rect:
-        serializedVersion: 2
-        x: 2010
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1bd84403052f02438d6d811714abe03
-      internalID: 1671013521
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_6
-      rect:
-        serializedVersion: 2
-        x: 2412
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73874b37825e7064f965a50fdd39b745
-      internalID: 1293681637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_7
-      rect:
-        serializedVersion: 2
-        x: 2814
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d834d32e0884c2f43a96e1b6312c94a8
-      internalID: 87543469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jon_Run_8
-      rect:
-        serializedVersion: 2
-        x: 3216
-        y: 0
-        width: 402
-        height: 282
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eece1936bdfa26d46bfe00ff73661eda
-      internalID: 2027179364
+      spriteID: 40a63ff81bcf14048849e2af809e61bc
+      internalID: -509301571
       vertices: []
       indices: 
       edges: []
@@ -303,15 +366,36 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Jon_Run_3: 892211182
-      Jon_Run_6: 1293681637
-      Jon_Run_0: 1771934257
-      Jon_Run_1: 1170029965
-      Jon_Run_7: 87543469
-      Jon_Run_5: 1671013521
-      Jon_Run_4: -407748033
-      Jon_Run_8: 2027179364
-      Jon_Run_2: -1857487494
+      BossBigAttack_15: -1239108749
+      BossBigAttack_25: 1350919958
+      BossBigAttack_7: 1594623108
+      BossBigAttack_14: 1536707824
+      BossBigAttack_8: 774351464
+      BossBigAttack_1: -773876776
+      BossBigAttack_11: 1188650280
+      BossBigAttack_19: 1644921151
+      BossBigAttack_4: -1491981646
+      BossBigAttack_6: -1711936607
+      BossBigAttack_18: 2017322440
+      BossBigAttack_16: 1002203626
+      BossBigAttack_22: 763847326
+      BossBigAttack_10: 644840712
+      BossBigAttack_21: -541141253
+      BossBigAttack_29: -227817002
+      BossBigAttack_2: -574755784
+      BossBigAttack_17: -1889819624
+      BossBigAttack_3: -686711954
+      BossBigAttack_12: 1549425394
+      BossBigAttack_24: 849224868
+      BossBigAttack_26: -1501329586
+      BossBigAttack_27: 1667593590
+      BossBigAttack_28: 43774769
+      BossBigAttack_20: -1184511543
+      BossBigAttack_9: -802721597
+      BossBigAttack_0: -509301571
+      BossBigAttack_23: 706839683
+      BossBigAttack_5: 1866417680
+      BossBigAttack_13: 1602885546
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -8,6 +8,7 @@ public class HitHandler : MonoBehaviour
     //May also be useful for triggering what happens when a hit connects
     private StateMachine stateMachine;
     private HealthHandler healthHandler;
+    public GameObject deathParticle;
     public Collider2D feetCollider { get; private set; }
     [SerializeField]
     private int hitIndex;
@@ -30,19 +31,12 @@ public class HitHandler : MonoBehaviour
         healthHandler.TakeDamage(damage);
         if (healthHandler.currentHealth <= 0)
         {
-            StartCoroutine(Death());
+            Instantiate(deathParticle, transform.position,Quaternion.identity);
+            Destroy(gameObject);
         }
         else
         {
             yield return new WaitForSeconds(timeInHitstun);
         }
-    }
-
-    private IEnumerator Death()
-    {
-        yield return null;
-        //play Death animation
-        //wait for animation to finish
-        Destroy(gameObject);
     }
 }

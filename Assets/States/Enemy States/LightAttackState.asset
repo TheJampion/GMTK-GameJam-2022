@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e1c33c60883e1540a6d27890656ca31, type: 3}
-  m_Name: Run
+  m_Name: LightAttackState
   m_EditorClassIdentifier: 
-  stateName: Run
+  stateName: LightAttack1
   transitions:
-  - trigger: 9
+  - trigger: 1
     nextState: {fileID: 11400000, guid: b3f415c8f53eaef499df39c74bfc6f18, type: 2}
-  attackData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: a8590aa78a1162a44ba502f9cc5a69ca, type: 2}

@@ -9,19 +9,20 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
     public HealthBarUI enemyHealthBar;
     public Queue<Enemy> enemyAttackQueue = new Queue<Enemy>();
-    private float attackTimer;
+    public float attackTimer;
     [SerializeField]
-    private float timeBetweenAttacks = 1.5f;
+    private float timeBetweenAttacks = 2.5f;
+    public bool waitingForAttackFinish;
     public bool waveStarted;
 
     public void Attack()
     {
-        attackTimer = 0;
         if (enemyAttackQueue.Count > 0)
         {
             Enemy enemy = enemyAttackQueue.Dequeue();
             if (enemy)
             {
+                waitingForAttackFinish = true;
                 enemy.PrepareToAttack();
             }
         }
@@ -67,7 +68,7 @@ public class EnemyManager : MonoBehaviour
         if (waveStarted)
         {
             attackTimer += Time.deltaTime;
-            if (attackTimer > timeBetweenAttacks)
+            if (attackTimer > timeBetweenAttacks && !waitingForAttackFinish)
             {
                 Attack();
             }

@@ -67,7 +67,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7112035293620680888}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -79,7 +79,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!1 &7112035294572562426
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7112035294572562181}
   - component: {fileID: 7112035294572562178}
   - component: {fileID: 4419673784923082141}
+  - component: {fileID: 1716376435026585611}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -229,7 +230,7 @@ Animator:
   m_GameObject: {fileID: 7112035294572562426}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 106acab65d2a66646a140c7d62daa994, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0a2e94fe25ef57f40964aaee6c30f85d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -253,7 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   activated: 0
-  attackHitbox: {fileID: 8790828186649415429, guid: 7ef80b969d5e0aa4a9174c3c06add588, type: 3}
+  attackState: {fileID: 11400000, guid: a4799d6698b7b6d4ebe60cc998c296ce, type: 2}
+  isMoving: 0
+  heavyState: {fileID: 0}
 --- !u!114 &7112035294572562181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cacb14ad8a3b3b4ba62acfd21232467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 763072264052615658, guid: 85be61cbf5779594bb1bf61145d5b880, type: 3}
   hitIndex: 1
 --- !u!114 &7112035294572562178
 MonoBehaviour:
@@ -279,7 +283,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf357d85e21cc4f864a57bfa69f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitstunState: {fileID: 11400000, guid: 3c3185c7f538e75419d624e085291912, type: 2}
+  hitstunTime: 0
+  hitstunDistance: 0
   startingState: {fileID: 11400000, guid: b3f415c8f53eaef499df39c74bfc6f18, type: 2}
+  isInHitstun: 0
 --- !u!114 &4419673784923082141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,3 +302,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 15
   maxHealth: 15
+--- !u!114 &1716376435026585611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112035294572562426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fbef9ae9a9f0b488b79259881c2e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: {fileID: 0}
+  attackActive: 0

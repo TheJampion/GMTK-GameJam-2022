@@ -19,6 +19,8 @@ public class Attack : ScriptableObject
     private float minimumDistance;
     [SerializeField]
     private float moveSpeed;
+
+    public GameObject Hitbox { get => hitbox; }
     public float HitstunDuration { get => hitstunDuration;}
     public float KnockbackDistance { get => knockbackDistance;}
     public bool IsKnockUp { get => isKnockUp;}
