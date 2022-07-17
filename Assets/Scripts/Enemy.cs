@@ -11,11 +11,15 @@ public class Enemy : MonoBehaviour
     public float speed;
     public bool activated;
     [SerializeField]
-    private GameObject attackHitbox;
+    private State attackState;
     private StateMachine stateMachine;
     private bool isTryingToAttack;
     private PlayerController player;
     public bool isMoving;
+    private float moveTimer;
+    private Vector2 target;
+    [SerializeField]
+    private State heavyState;
 
     private void Awake()
     {
@@ -30,15 +34,17 @@ public class Enemy : MonoBehaviour
 
     private void AttackAction()
     {
-        StartCoroutine(Attack(attackHitbox));
-    }
-
-    IEnumerator Attack(GameObject hitbox)
-    {
-        yield return new WaitForSeconds(0.3f);
-        GameObject attack = Instantiate(hitbox, transform);
-        yield return new WaitForSeconds(0.5f);
-        Destroy(attack);
+        float random = UnityEngine.Random.Range(0f, 1f);
+        if(random > 0.5f || !heavyState)
+        {
+            stateMachine.EnterState(attackState, 0);
+        }
+        else if (heavyState)
+        {
+            stateMachine.EnterState(heavyState, 0);
+        }
+        EnemyManager.instance.attackTimer = 0f;
+        EnemyManager.instance.waitingForAttackFinish = false;
     }
 
     private void OnDestroy()
@@ -49,14 +55,30 @@ public class Enemy : MonoBehaviour
 
     private void MoveInDirection(Vector3 direction, float speed)
     {
-        transform.right = player.transform.position.x - transform.position.x > 0 ? Vector3.right : -Vector3.right ;
+        transform.right = player.transform.position.x - transform.position.x > 0 ? Vector3.right : -Vector3.right;
         transform.position += direction * speed * Time.deltaTime;
         isMoving = true;
     }
 
+
+
     private void Update()
     {
-        if (activated)
+        if (stateMachine.isInHitstun)
+        {
+            transform.position += -transform.right * stateMachine.hitstunDistance * Time.deltaTime;
+            return;
+        }
+        if (!activated)
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < 5.0f)
+            {
+                activated = true;
+                EnemyManager.instance.waveStarted = true;
+                EnemyManager.instance.AddEnemyToQueue(this);
+            }
+        }
+        else
         {
             if (isTryingToAttack)
             {
@@ -64,7 +86,7 @@ public class Enemy : MonoBehaviour
                 {
                     MoveInDirection((player.transform.position - transform.position).normalized, speed);
                 }
-                else if(Mathf.Abs(transform.position.y - player.transform.position.y) > 0.2f)
+                else if (Mathf.Abs(transform.position.y - player.transform.position.y) > 0.2f)
                 {
                     Vector3 direction = player.transform.position.y - transform.position.y > 0 ? Vector3.up : -Vector3.up;
                     MoveInDirection(direction, speed);
@@ -78,7 +100,25 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                isMoving = false;
+                if (!stateMachine.isAttacking)
+                {
+                    moveTimer += Time.deltaTime;
+                    if (Vector2.Distance((Vector2)transform.position, target) < 0.25f)
+                    {
+                        isMoving = false;
+                    }
+                    else
+                    {
+                        transform.right = target.x - transform.position.x > 0 ? Vector3.right : -Vector3.right;
+                        transform.position += ((Vector3)target - transform.position).normalized * speed * Time.deltaTime;
+                        isMoving = true;
+                    }
+                    if (moveTimer > 4f)
+                    {
+                        target = PlayerCamera.randomPointInsideCameraView();
+                        moveTimer = 0;
+                    }
+                }
             }
         }
     }

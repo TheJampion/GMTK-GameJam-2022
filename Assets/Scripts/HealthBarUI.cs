@@ -15,7 +15,10 @@ public class HealthBarUI : MonoBehaviour
     void Update()
     {
         if (!healthHandler)
+        {
+            childPanel.SetActive(false);
             return;
+        }
         healthImage.fillAmount = healthHandler.currentNormalizedHealth;
         if((healthImage.fillAmount <= 0) && childPanel.activeInHierarchy)
         {

@@ -8,18 +8,25 @@ public class StateMachine : MonoBehaviour
     protected float timeTillStateOver;
     private Animator _animator;
     public State currentState { get; private set; }
+    public State hitstunState;
     protected float stateTimer;
+    public float hitstunTime;
+    public float hitstunDistance;
     [SerializeField]
     private State startingState;
     private PlayerController playerController;
+    private AttackController attackController;
     private Enemy enemy;
     private bool isPlayer;
+    public bool isInHitstun;
+    public bool isAttacking { get; private set; }
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         enemy = GetComponent<Enemy>();
+        attackController = GetComponent<AttackController>();
         isPlayer = playerController != null;
     }
 
@@ -30,6 +37,11 @@ public class StateMachine : MonoBehaviour
     private void Update()
     {
         stateTimer += Time.deltaTime;
+        float actualStateTime = _animator.GetCurrentAnimatorStateInfo(0).length;
+        if (timeTillStateOver != actualStateTime)
+        {
+            timeTillStateOver = actualStateTime;
+        }
         if (isPlayer)
         {
             CheckStateConditionsPlayer();
@@ -42,6 +54,18 @@ public class StateMachine : MonoBehaviour
 
     public void CheckStateConditionsPlayer()
     {
+        if (isInHitstun)
+        {
+            if (currentState != hitstunState)
+            {
+                EnterState(hitstunState, 0);
+            }
+            else if (stateTimer >= hitstunTime)
+            {
+                isInHitstun = false;
+                EnterState(startingState, 0);
+            }
+        }
         if (currentState.Transitions.Count > 0)
         {
             for (int i = 0; i < currentState.Transitions.Count; i++)
@@ -50,25 +74,36 @@ public class StateMachine : MonoBehaviour
                 {
                     EnterState(currentState.Transitions[i].nextState, 0);
                 }
-                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput)
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput && playerController.isMoving)
                 {
-                    if (enemy.isMoving)
-                    {
-                        EnterState(currentState.Transitions[i].nextState, 0);
-                    }
+                    EnterState(currentState.Transitions[i].nextState, 0);
                 }
-                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput)
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput && !playerController.isMoving)
                 {
-                    if (!enemy.isMoving)
-                    {
-                        EnterState(currentState.Transitions[i].nextState, 0);
-                    }
+                    EnterState(currentState.Transitions[i].nextState, 0);
+                }
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.Light && Input.GetKeyDown(KeyCode.F))
+                {
+                    EnterState(currentState.Transitions[i].nextState, 0);
                 }
             }
         }
     }
     public void CheckStateConditionsEnemy()
     {
+        if (isInHitstun)
+        {
+            if (currentState != hitstunState)
+            {
+                EnterState(hitstunState, 0);
+            }
+            else if(stateTimer >= hitstunTime)
+            {
+                isInHitstun = false;
+                EnterState(startingState, 0);
+            }
+        }
+
         if (currentState.Transitions.Count > 0)
         {
             for (int i = 0; i < currentState.Transitions.Count; i++)
@@ -77,46 +112,31 @@ public class StateMachine : MonoBehaviour
                 {
                     EnterState(currentState.Transitions[i].nextState, 0);
                 }
-                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput)
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.MoveInput && enemy.isMoving)
                 {
-                    if (playerController)
-                    {
-                        if (playerController.isMoving)
-                        {
-                            EnterState(currentState.Transitions[i].nextState, 0);
-                        }
-                    }
-                    if (enemy)
-                    {
-                        if (enemy.isMoving)
-                        {
-                            EnterState(currentState.Transitions[i].nextState, 0);
-                        }
-                    }
+                    EnterState(currentState.Transitions[i].nextState, 0);
                 }
-                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput)
+                if (currentState.Transitions[i].trigger == TransitionData.Trigger.NoMoveInput && !enemy.isMoving)
                 {
-                    if (playerController)
-                    {
-                        if (!playerController.isMoving)
-                        {
-                            EnterState(currentState.Transitions[i].nextState, 0);
-                        }
-                    }
-                    if (enemy)
-                    {
-                        if (!enemy.isMoving)
-                        {
-                            EnterState(currentState.Transitions[i].nextState, 0);
-                        }
-                    }
+                    EnterState(currentState.Transitions[i].nextState, 0);
                 }
             }
         }
     }
+
     public void EnterState(State state, float transitionDuration)
     {
         _animator.Play(state.StateName);
+        if (state.AttackData)
+        {
+            attackController.currentAttack = state.AttackData;
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+        stateTimer = 0;
         timeTillStateOver = _animator.GetCurrentAnimatorStateInfo(0).length;
         currentState = state;
     }

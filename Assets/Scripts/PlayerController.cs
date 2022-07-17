@@ -29,25 +29,6 @@ public class PlayerController : MonoBehaviour
         stateMachine = GetComponent<StateMachine>();
     }
 
-    private void AttackAction()
-    {
-        StartCoroutine(Attack(attackHitbox));
-    }
-
-    IEnumerator Attack(GameObject hitbox)
-    {
-        GameObject attack = Instantiate(hitbox, transform);
-        if (spriteRenderer.flipX)
-        {
-            Vector3 attackPos = attack.transform.localPosition;
-            attack.transform.localPosition = new Vector3(-attackPos.x, attackPos.y, attackPos.z);
-        }
-        yield return new WaitForSeconds(0.25f);
-        if (attack)
-        {
-            Destroy(attack);
-        }
-    }
     void MoveCharacter()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -103,10 +84,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveCharacter();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!stateMachine.isAttacking)
         {
-            AttackAction();
+            MoveCharacter();
         }
     }
 }

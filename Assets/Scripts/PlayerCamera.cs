@@ -12,6 +12,21 @@ public class PlayerCamera : MonoBehaviour
     public Camera mainCamera;
 
     // Update is called once per frame
+
+    public static Vector2 randomPointInsideCameraView()
+    {
+        float x = Random.Range(cameraMin.x + 1, cameraMax.x - 1);
+        float y = Random.Range(cameraMin.y + 0.5f, cameraMin.y + 2f);
+        return new Vector2(x, y);
+    }
+
+    public static Vector2 randomPointOutsideCameraView()
+    {
+        float x = Random.Range(cameraMin.x - 1, cameraMax.x + 1);
+        float y = Random.Range(cameraMin.y + 0.5f, cameraMin.y + 2f);
+        return new Vector2(x, y);
+    }
+
     void Update()
     {
         cameraMin = mainCamera.ViewportToWorldPoint(Vector3.zero);

@@ -20,4 +20,5 @@ public class State : ScriptableObject
     private Attack attackData;
     public string StateName { get => stateName; }
     public List<TransitionData> Transitions { get => transitions; }
+    public Attack AttackData { get => attackData; }
 }

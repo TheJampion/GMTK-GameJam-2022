@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6805623767505841934}
   - component: {fileID: 6805623767505841935}
   - component: {fileID: 6805623767505841933}
+  - component: {fileID: 8943332835656714365}
   m_Layer: 6
   m_Name: Character
   m_TagString: Player
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 1531b6b677a1bb14086fc8302cd2076e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -175,6 +176,7 @@ MonoBehaviour:
   verticalSpeed: 2
   attackSprite: {fileID: 21300000, guid: e7023b914ac3765419fb5171c67db0d7, type: 3}
   attackHitbox: {fileID: 8790828186649415429, guid: 7ef80b969d5e0aa4a9174c3c06add588, type: 3}
+  isMoving: 0
 --- !u!114 &6805623767505841934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cacb14ad8a3b3b4ba62acfd21232467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 0}
   hitIndex: 0
 --- !u!114 &6805623767505841935
 MonoBehaviour:
@@ -200,10 +203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cdf357d85e21cc4f864a57bfa69f93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAttacking: 0
-  IsInHitstun: 0
-  IsMoving: 0
-  timeTillStateOver: 0
+  hitstunState: {fileID: 11400000, guid: 3c3185c7f538e75419d624e085291912, type: 2}
+  hitstunTime: 0
+  hitstunDistance: 0
+  startingState: {fileID: 11400000, guid: 381b0f43d8720a845a4b22be05674f52, type: 2}
+  isInHitstun: 0
 --- !u!114 &6805623767505841933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +222,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+--- !u!114 &8943332835656714365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6805623767505841924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fbef9ae9a9f0b488b79259881c2e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: {fileID: 0}
+  attackActive: 0
 --- !u!1 &6805623767941415196
 GameObject:
   m_ObjectHideFlags: 0

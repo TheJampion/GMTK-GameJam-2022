@@ -28,7 +28,6 @@ public class EnemyWave : MonoBehaviour
         foreach (Enemy enemy in startingEnemies)
         {
             enemy.onDestroy += (enemy) => DestroyEnemy(enemy);
-            enemy.activated = true;
             activeEnemies.Add(enemy);
             totalEnemies++;
             enemiesAlreadySpawned++;
@@ -37,7 +36,6 @@ public class EnemyWave : MonoBehaviour
     }
     public void StartWave()
     {
-        waveActive = true;
         EnemyManager.instance.waveStarted = true;
         fightBoundary.SetActive(false);
         totalEnemies += enemiesToSpawn.Count;
@@ -45,6 +43,8 @@ public class EnemyWave : MonoBehaviour
         {
             EnemyManager.instance.AddEnemyToQueue(enemy);
         }
+        SpawnEnemy();
+        waveActive = true;
     }
 
     private void DestroyEnemy(Enemy enemy)
